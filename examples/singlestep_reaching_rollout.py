@@ -1,6 +1,6 @@
 import torch
 from training import MpiNetDataset
-from common import NearbyIK
+from common.nearby_ik import NearbyIK
 from xmop import XMoP
 from common import BulletRobotEnv
 from common import JointConfigTool
