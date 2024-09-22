@@ -24,7 +24,7 @@ def gen_process(dataset_path, panda_urdf_path, start_idx, end_idx, id):
     with RedirectStream(f'log/{id}.log'):
         dataset = MpiNetDataset("global_solutions", dataset_path, panda_urdf_path, num_obstacle_points=None)
         planner = OmplPlanner(collision_inflation=0.01, path_cost_threshold=20.0, verbose=False)
-        sim_handle = BulletRobotEnv(gui=True)
+        sim_handle = BulletRobotEnv(gui=False)
         traj_mgr = TrajDataManager(f'resources/datasets/traj_dataset/temp/{id}', start_idx, end_idx, mode='w')
         total = 0
         success = 0
@@ -99,7 +99,7 @@ def main():
     parser.add_argument('--panda_urdf', default='urdf/franka_panda/panda.urdf', type=str, help='Franka Panda urdf path')
     parser.add_argument('--start_idx', default=0, type=int, help='Starting MpiNet index')
     parser.add_argument('--end_idx', default=5, type=int, help='Ending MpiNet index')
-    parser.add_argument('--num_proc', default=1, type=int, help='Number of workhorse processes')
+    parser.add_argument('--num_proc', default=5, type=int, help='Number of workhorse processes')
     args = parser.parse_args()
     print(args)
 

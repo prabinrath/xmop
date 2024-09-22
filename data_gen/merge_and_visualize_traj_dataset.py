@@ -44,7 +44,6 @@ def get_primitive(link_pose, center, link_collision):
     return None
 
 viz_indices = np.random.choice(traj_mgr.success_indices, 10, replace=False)
-# viz_indices = [6755, 7155]
 
 for idx in viz_indices:
     try:
