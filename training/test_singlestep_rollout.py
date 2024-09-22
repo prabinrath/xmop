@@ -20,14 +20,14 @@ mpinet_dataset = MpiNetDataset('global_solutions',
                                sample_color=True)
 random_indices = np.random.choice(len(mpinet_dataset), 10, replace=False)
 
-traj_mgr = TrajDataManager('resources/datasets/traj_dataset/global', 0, 3270000)
+traj_mgr = TrajDataManager('resources/datasets/traj_dataset', 0, 3270000)
 ndof_generator = NDofGenerator(template_path='urdf/n_dof_template.xacro',
                                     joint_gap=0.005, base_axis=2, base_offset=0.03)
 
-with open("config/singlestep_planning_policy.yaml") as file:
+with open("config/xmop_s_reaching_policy.yaml") as file:
     model_config = yaml.safe_load(file)
     model = SinglestepPosePlanningPolicy(model_config).to(device)
-    checkpoint = torch.load('checkpoints/transformer_singlestep_poseonly_planning_policy_5_epoch.pth')
+    checkpoint = torch.load('checkpoints/XMoP-S_Policy/XMoP-S_Policy_terminal.pth')
     model.load_state_dict(checkpoint['ema_model'])
     model.eval()
 
@@ -36,8 +36,7 @@ sim_handle = BulletRobotEnv(gui=True)
 
 for idx in random_indices:
     (obstacle_surface_pts, _), obstacle_config, eef_plan = mpinet_dataset.get_scenario(idx)
-    # obstacle_surface_pts = obstacle_surface_pts.astype(np.float32)
-    # sim_handle.load_obstacles(obstacle_config)
+    # eef goal is non-hindsight, hence unseen during training
     goal_eef = eef_plan[-1]
     sim_handle.set_dummy_state(goal_eef[0], goal_eef[1])
 

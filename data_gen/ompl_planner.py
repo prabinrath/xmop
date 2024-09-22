@@ -144,7 +144,7 @@ class OmplPlanner():
                 last_config = curr_config
                 path.append(last_config)
             t += curve.x[-1]/500
-        path.append(curve(curve.x[-1]))
+        path.append(curve(curve.x[-1])) # this line was commented in the original XMoP dataset
         path = np.asarray(path, dtype=np.float32)
         return path
     

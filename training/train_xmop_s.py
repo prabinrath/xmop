@@ -14,16 +14,15 @@ import wandb
 import os
 
 
-LOGGING = False
+LOGGING = True
 device = 'cuda'
-experiment_name = 'T_PoseOnly_Singlestep_2'
-experiment_notes = 'singlestep planning, hidden size 512, transformer only'
-# store_dir = '/media/scratch2/prabin/'
+experiment_name = 'XMoP-S_Policy'
+experiment_notes = 'singlestep planning, hidden size 512, transformer policy, 5 epochs'
 store_dir = ''
 
 
 def main(args):
-    traj_dataset_root = os.path.join(store_dir, 'resources/datasets/traj_dataset/global')
+    traj_dataset_root = os.path.join(store_dir, 'resources/datasets/traj_dataset')
     ckpt_dir = os.path.join(store_dir, 'checkpoints', experiment_name)
     log_dir = os.path.join(store_dir, 'log', experiment_name)
     Path(ckpt_dir).mkdir(parents=True, exist_ok=True)
@@ -41,7 +40,7 @@ def main(args):
                             pin_memory=True, 
                             num_workers=args.num_workers)
 
-    with open("config/singlestep_planning_policy.yaml") as file:
+    with open("config/xmop_s_reaching_policy.yaml") as file:
         model_config = yaml.safe_load(file)
         model = SinglestepPosePlanningPolicy(model_config).to(device)
         model.train()
@@ -95,12 +94,10 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    # parser.add_argument("--batch-size", type=str, default=24)
-    parser.add_argument("--batch-size", type=str, default=8)
+    parser.add_argument("--batch-size", type=str, default=64)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=10_000)
-    # parser.add_argument("--num-workers", type=int, default=24)
-    parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument("--num-workers", type=int, default=64)
     parser.add_argument("--epochs", type=int, default=5)
     args = parser.parse_args()
     main(args)

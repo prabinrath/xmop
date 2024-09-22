@@ -73,9 +73,7 @@ class XCoDDataset(MpiNetDataset):
         semantic_labels_dict = {}
         for link in urdf_handle.links:
             link_pose = fk_dict[link]
-            # urdfpy does not work as expected on the generated urdf files.
-            # the quaternions for the links are not set after link_fk and we get identity for rotation matrix. 
-            # a hacky fix for this is multiplying the pose matrix with the local pose of the link
+            # we can also use visual_geometry_fk here, it has exact same logic
             link_pose = link_pose @ link.collisions[0].origin
             center = link_pose[:3,3]
             link_id = int(link.name[6])

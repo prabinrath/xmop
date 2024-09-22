@@ -95,13 +95,13 @@ def init_pool(shared_idx, shared_arr):
     arr_mp = shared_arr
 
 def main():    
-    parser = argparse.ArgumentParser(description='AnyNMP')
+    parser = argparse.ArgumentParser(description='XMoP Data Generation')
     parser.add_argument('--mpinet_dataset', default='resources/datasets/mpinet_dataset/train.hdf5', type=str, help='MpiNet train.hdf5 path')
     parser.add_argument('--panda_urdf', default='urdf/franka_panda/panda.urdf', type=str, help='Franka Panda urdf path')
     parser.add_argument('--traj_dataset', default='resources/datasets/traj_dataset/', type=str, help='traj dataset 0_3270000.h5 path')
-    parser.add_argument('--start_idx', default=3100000, type=int, help='Starting MpiNet index')
+    parser.add_argument('--start_idx', default=0, type=int, help='Starting MpiNet index')
     parser.add_argument('--end_idx', default=3270000, type=int, help='Ending MpiNet index')
-    parser.add_argument('--num_proc', default=20, type=int, help='Number of workhorse processes')
+    parser.add_argument('--num_proc', default=5, type=int, help='Number of workhorse processes')
     args = parser.parse_args()
     print(args)
 
@@ -128,7 +128,6 @@ def main():
     # merge collisions and clean up
     coll_mgr = CollisionDataManager('resources/datasets/coll_dataset/', start_idx, end_idx, mode='w')
     coll_mgr.merge_coll_datasets2('resources/datasets/coll_dataset/temp/')
-    clean_dirs('log/')
     clean_dirs('resources/datasets/coll_dataset/temp/')
 
 main()

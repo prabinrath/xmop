@@ -14,22 +14,21 @@ import wandb
 import os
 
 
-LOGGING = False
+LOGGING = True
 device = 'cuda'
-experiment_name = 'DiT_PoseOnly_Multistep_5'
-experiment_notes = 'multistep planning, hidden size 512, 20 epoch'
-# store_dir = '/media/scratch2/prabin/'
+experiment_name = 'XMoP_Policy'
+experiment_notes = 'multistep planning, hidden size 512, diffusion policy, 20 epochs'
 store_dir = ''
 
 
 def main(args):
-    traj_dataset_root = os.path.join(store_dir, 'resources/datasets/traj_dataset/global')
+    traj_dataset_root = os.path.join(store_dir, 'resources/datasets/traj_dataset')
     ckpt_dir = os.path.join(store_dir, 'checkpoints', experiment_name)
     log_dir = os.path.join(store_dir, 'log', experiment_name)
     Path(ckpt_dir).mkdir(parents=True, exist_ok=True)
     Path(log_dir).mkdir(parents=True, exist_ok=True)
 
-    with open("config/multistep_planning_policy.yaml") as file:
+    with open("config/xmop_planning_policy.yaml") as file:
         model_config = yaml.safe_load(file)
         model = MultistepPosePlanningPolicy(model_config).to(device)
         model.train()
@@ -96,11 +95,9 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch-size", type=str, default=64)
-    # parser.add_argument("--batch-size", type=str, default=8)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=10_000)
     parser.add_argument("--num-workers", type=int, default=64)
-    # parser.add_argument("--num-workers", type=int, default=0)
-    parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--epochs", type=int, default=20)
     args = parser.parse_args()
     main(args)

@@ -92,7 +92,7 @@ for idx in viz_indices:
                                             1024, noise=0.0, semantic_labels=semantic_labels, colors=colors)
 
     # generate pointcloud observations
-    viz_handle = Open3DVisualizer()
+    viz_handle = Open3DVisualizer(window_name="Pointcoud Training Data")
     fk_dict_batch = urdf_handle.link_fk_batch(cfgs=traj)
     semantic_color_map = [
         [1.0,   0.0,   0.0],
@@ -110,9 +110,7 @@ for idx in viz_indices:
         colors = []
         for link in urdf_handle.links:
             link_pose = fk_dict_batch[link][idx]
-            # urdfpy does not work as expected on the generated urdf files.
-            # the quaternions for the links are not set after link_fk and we get identity for rotation matrix. 
-            # a hacky fix for this is multiplying the pose matrix with the local pose of the link
+            # we can also use visual_geometry_fk here, it has exact same logic
             link_pose = link_pose @ link.visuals[0].origin
             center = link_pose[:3,3]
             link_id = int(link.name[6])
@@ -128,5 +126,6 @@ for idx in viz_indices:
 
         viz_handle.update_buffers(surface_pts[:,:3], color_pts)
         time.sleep(0.05)
+    print("INFO: Close the Pointcoud Training Data window for next scenario")
     viz_handle.vis.run()
     del viz_handle

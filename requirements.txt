@@ -14,3 +14,4 @@ pyquaternion==0.9.9
 geometrout==0.1.0.11
 urchin==0.0.27
 pybullet==3.2.6
+wandb==0.16.3

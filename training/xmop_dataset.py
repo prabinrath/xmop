@@ -61,7 +61,7 @@ class XMoPDataset():
         for link in urdf_handle.links:
             manip_semantic_link_map[int(link.name[6])].append(link)
         
-        # assign random sub links from link templates
+        # assign random sub links from link templates (frame randomization)
         fk_link_indices = [np.random.choice(len(manip_semantic_link_map[key]))
                            for key in range(dof)]
         fk_link_indices.append(1) # gripper
@@ -78,6 +78,7 @@ class XMoPDataset():
         PA_9d[:dof] = T_9d[:dof]
         PA_9d[-1] = T_9d[dof]
 
+        # get the hindsight end-effector goal
         fk_dict = urdf_handle.link_fk(cfg=target_config, use_names=True)
         target_ee_link = manip_semantic_link_map[dof][fk_link_indices[-1]]
         goal_pose = fk_dict[target_ee_link.name]@link.visuals[0].origin
