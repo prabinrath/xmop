@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ee_robot">
+
+  <material name="teal">
+    <color rgba="0.0 0.5 0.5 1.0"/>
+  </material>  
+
+  <xacro:property name="joint_gap" value="0.0005" />
+
+  <!-- Gripper axis is always z -->
+  <xacro:macro name="just_gripper" params="m_num mb mf s">
+    <xacro:property name="sx" value="${s*0.06}" />
+    <xacro:property name="sy" value="${s*0.2}" />
+    <xacro:property name="sz" value="${s*0.09}" />
+    <xacro:property name="fx" value="${s*0.02}" />
+    <xacro:property name="fy" value="${s*0.03}" />
+    <xacro:property name="fz" value="${s*0.05}" />
+    <link name="link_g${m_num}1">
+      <visual>
+        <geometry>
+          <box size="${sx} ${sy} ${sz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${sx} ${sy} ${sz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mb}" x="${sx}" y="${sy}" z="${sz}"/>
+    </link>
+    <xacro:fixed_joint prefix="g${m_num}1" suffix="g${m_num}2">
+      <origin xyz="0 ${sy/4} ${sz/2+fz/2+joint_gap}" rpy="0 0 0" />
+    </xacro:fixed_joint>
+    <link name="link_g${m_num}2">
+      <visual>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mf}" x="${fx}" y="${fy}" z="${fz}"/>
+    </link>
+    <xacro:fixed_joint prefix="g${m_num}1" suffix="g${m_num}3">
+      <origin xyz="0 ${-sy/4} ${sz/2+fz/2+joint_gap}" rpy="0 0 0" />
+    </xacro:fixed_joint>
+    <link name="link_g${m_num}3">
+      <visual>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mf}" x="${fx}" y="${fy}" z="${fz}"/>
+    </link>
+  </xacro:macro>
+
+</robot>

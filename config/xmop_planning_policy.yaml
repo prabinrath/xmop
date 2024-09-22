@@ -1,0 +1,12 @@
+noise_model:
+    max_dof: 7
+    num_layers: 8
+    num_heads: 8
+    hidden_dim: 512
+    horizon: 16
+    
+noise_schedule_type: "ddim"
+train_steps: 100
+beta_schedule: "squaredcos_cap_v2"
+
+num_samples: 16

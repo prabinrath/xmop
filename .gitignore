@@ -1,0 +1,7 @@
+**.pyc
+**.npy
+**.pth
+resources/
+benchmark/results/
+log/
+wandb/

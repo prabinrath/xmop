@@ -1,0 +1,5 @@
+pose_model:
+    max_dof: 7
+    num_layers: 8
+    num_heads: 8
+    hidden_dim: 512

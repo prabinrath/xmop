@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="n_dof_robot">
+
+  <material name="teal">
+    <color rgba="0.0 0.5 0.5 1.0"/>
+  </material>  
+  
+  <xacro:property name="base_height" value="0.05" />
+  <xacro:property name="base_radius" value="0.2" />
+  <xacro:property name="base_mass" value="0.2" />
+
+  <!-- Attach Arm to Ground -->
+  <!-- <link name="world"></link>
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child link="link_m03"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint> -->
+
+  <!-- Define the base link -->
+  <link name="link_m03">
+    <visual>
+      <geometry>
+        <cylinder length="${base_height}" radius="${base_radius}"/>
+      </geometry>
+      <material name="teal"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="${base_height}" radius="${base_radius}"/>
+      </geometry>
+    </collision>
+     <inertial>
+      <mass value="${base_mass}" />
+      <inertia ixx="${(1/12)*base_mass*(3*base_radius*base_radius+base_height*base_height)}" 
+      iyy="${(1/12)*base_mass*(3*base_radius*base_radius+base_height*base_height)}" 
+      izz="${(1/2)*base_mass*base_radius*base_radius}"
+      ixy="0.0" ixz="0.0" iyz="0.0" />
+    </inertial>
+  </link>
+
+  <xacro:macro name="loop" params="items:=^">
+		<xacro:if value="${len(items) > 0}">
+			<xacro:property name="item" value="${items.pop(0)}"/>
+      <xacro:revolute_joint prefix="${item['prefix']}" 
+                            suffix="${item['suffix']}" 
+                            ll="${item['limits'][0]}" ul="${item['limits'][1]}"
+                            el="${item['limits'][2]}" vl="${item['limits'][3]}" 
+                            fr="${item['dynamics'][0]}" dm="${item['dynamics'][1]}">
+        <origin xyz="${item['origin_xyz']}" rpy="${item['origin_rpy']}" />
+        <axis xyz="${item['axis_xyz']}" />
+      </xacro:revolute_joint>
+      <xacro:if value="${item['type'] == 'member'}">
+        <xacro:member m_num="${item['m_num']}" pattern="${item['pattern']}" 
+                      lx="${item['l_xyz'][0]}" ly="${item['l_xyz'][1]}" lz="${item['l_xyz'][2]}" 
+                      mx="${item['m_xyz'][0]}" my="${item['m_xyz'][1]}" mz="${item['m_xyz'][2]}" 
+                      r="${item['r']}" flip_joint="${item['flip_joint']}"/>
+      </xacro:if>
+      <xacro:if value="${item['type'] == 'gripper'}">
+        <xacro:gripper m_num="${item['m_num']}" h="${item['h']}" r="${item['r']}" 
+                       mc="${item['m_eof'][0]}" mb="${item['m_eof'][1]}" mf="${item['m_eof'][2]}" 
+                       s="${item['s']}"/> 
+      </xacro:if>
+			<xacro:loop/>
+		</xacro:if>
+	</xacro:macro>
+
+</robot>

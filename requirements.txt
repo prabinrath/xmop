@@ -1,0 +1,16 @@
+--find-links https://data.pyg.org/whl/torch-2.2.0+cu121.html
+torch_scatter
+torch_sparse
+torch_cluster
+spconv-cu120==2.3.6
+diffusers==0.26.3
+flash-attn==2.5.3
+datasets==3.0.0
+numpy==1.26.4
+PyYAML==6.0.1
+open3d==0.18.0
+h5py==3.10.0
+pyquaternion==0.9.9
+geometrout==0.1.0.11
+urchin==0.0.27
+pybullet==3.2.6

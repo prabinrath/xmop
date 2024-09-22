@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="common">
+
+  <!-- Define inertia macro for cylinder -->
+  <xacro:macro name="cyl_inertia" params="mass r h">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12)*mass*(3*r*r+h*h)}" ixy="0.0" ixz="0.0" iyy="${(1/12)*mass*(3*r*r+h*h)}" iyz="0.0" izz="${(1/2)*mass*r*r}" />
+    </inertial>
+  </xacro:macro>
+
+  <!-- Define inertia macro for cuboid -->
+  <xacro:macro name="box_inertia" params="mass x y z">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12)*mass*(y*y+z*z)}" ixy="0.0" ixz="0.0" iyy="${(1/12)*mass*(x*x+z*z)}" iyz="0.0" izz="${(1/12)*mass*(y*y+x*x)}" />
+    </inertial>
+  </xacro:macro>
+
+  <!-- Define macro for the link -->
+  <xacro:macro name="cylinder_link" params="suffix mass length radius *origin">
+    <link name="link_${suffix}">
+      <visual>
+        <xacro:insert_block name="origin"/>
+        <geometry>
+          <cylinder length="${length}" radius="${radius}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <xacro:insert_block name="origin"/>
+        <geometry>
+          <cylinder length="${length}" radius="${radius}"/>
+        </geometry>
+      </collision>
+      <xacro:cyl_inertia mass="${mass}" r="${radius}" h="${length}"/>
+    </link>
+  </xacro:macro>
+
+  <!-- Define macro for the revolute joint -->
+  <xacro:macro name="revolute_joint" params="prefix suffix ll ul el vl fr dm *origin *axis">
+    <joint name="joint_${prefix}_${suffix}" type="revolute">
+      <parent link="link_${prefix}"/>
+      <child link="link_${suffix}"/>
+      <dynamics friction="${fr}" damping="${dm}" />
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="axis"/>
+      <limit effort="${el}" velocity="${vl}" lower="${ll}" upper="${ul}"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Define macro for fixed joint -->
+  <xacro:macro name="fixed_joint" params="prefix suffix *origin">
+    <joint name="fixed_joint_${prefix}_${suffix}" type="fixed">
+      <parent link="link_${prefix}"/>
+      <child link="link_${suffix}"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Define macro for generic member -->
+  <!-- 
+  m_num: member number
+  pattern: link configuration pattern 'yxz' -> link extrudes in y then x then zxy
+  lx, ly, lz: length of link cylinders
+  mx, my, mz: mass of link cylinders
+  r: radius of link cylinders
+  flip_joint: flip the next joint configuration about the rotation axis of previous joint
+
+  'zxy' -> 'yxz' here the connected patterns represent two different fixed links of the robot.
+  links are connected through their respective y cylinders and the rotation axis of the
+  connecting joint must be y.
+  -->
+  <xacro:macro name="member" params="m_num pattern lx ly lz mx my mz r flip_joint">
+
+    <xacro:if value="${pattern == 'yxz'}">
+      <xacro:cylinder_link suffix="m${m_num}1" mass="${my}" length="${ly}" radius="${r}">
+        <origin xyz="0 ${ly/2} 0" rpy="${pi/2} 0 0" />
+      </xacro:cylinder_link>
+      <xacro:if value="${lx > 0.0}">
+        <xacro:fixed_joint prefix="m${m_num}1" suffix="m${m_num}2">
+          <origin xyz="0 ${ly+r+joint_gap} 0" rpy="0 0 0" />
+        </xacro:fixed_joint>
+        <xacro:cylinder_link suffix="m${m_num}2" mass="${mx}" length="${lx}" radius="${r}">
+          <origin xyz="${lx/2-r} 0 0" rpy="0 ${pi/2} 0" />
+        </xacro:cylinder_link>
+        <xacro:fixed_joint prefix="m${m_num}2" suffix="m${m_num}3">
+          <xacro:if value="${flip_joint}">
+            <origin xyz="${lx+joint_gap} 0 0" rpy="0 ${pi} 0" />
+          </xacro:if>
+          <xacro:if value="${not flip_joint}">
+            <origin xyz="${lx+joint_gap} 0 0" rpy="0 0 0" />
+          </xacro:if>
+        </xacro:fixed_joint>
+      </xacro:if>
+      <xacro:if value="${lx == 0.0}">
+        <xacro:fixed_joint prefix="m${m_num}1" suffix="m${m_num}3">
+          <xacro:if value="${flip_joint}">
+            <origin xyz="0 ${ly+r+joint_gap} 0" rpy="0 ${pi} 0" />
+          </xacro:if>
+          <xacro:if value="${not flip_joint}">
+            <origin xyz="0 ${ly+r+joint_gap} 0" rpy="0 0 0" />
+          </xacro:if>
+        </xacro:fixed_joint>
+      </xacro:if>
+      <xacro:cylinder_link suffix="m${m_num}3" mass="${mz}" length="${lz}" radius="${r}">        
+        <origin xyz="0 0 ${lz/2-r}" rpy="0 0 0" />
+      </xacro:cylinder_link>
+    </xacro:if>
+
+    <xacro:if value="${pattern == 'zxy'}">
+      <xacro:cylinder_link suffix="m${m_num}1" mass="${mz}" length="${lz}" radius="${r}">
+        <origin xyz="0 0 ${lz/2}" rpy="0 0 0" />
+      </xacro:cylinder_link>
+      <xacro:if value="${lx > 0.0}">
+        <xacro:fixed_joint prefix="m${m_num}1" suffix="m${m_num}2">
+          <origin xyz="0 0 ${lz+r+joint_gap}" rpy="0 0 0" />
+        </xacro:fixed_joint>
+        <xacro:cylinder_link suffix="m${m_num}2" mass="${mx}" length="${lx}" radius="${r}">
+          <origin xyz="${lx/2-r} 0 0" rpy="0 ${pi/2} 0" />
+        </xacro:cylinder_link>
+        <xacro:fixed_joint prefix="m${m_num}2" suffix="m${m_num}3">
+          <xacro:if value="${flip_joint}">
+            <origin xyz="${lx+joint_gap} 0 0" rpy="0 0 ${pi}" />
+          </xacro:if>
+          <xacro:if value="${not flip_joint}">
+            <origin xyz="${lx+joint_gap} 0 0" rpy="0 0 0" />
+          </xacro:if>
+        </xacro:fixed_joint>
+      </xacro:if>
+      <xacro:if value="${lx == 0.0}">
+        <xacro:fixed_joint prefix="m${m_num}1" suffix="m${m_num}3">
+          <xacro:if value="${flip_joint}">
+            <origin xyz="0 0 ${lz+r+joint_gap}" rpy="0 0 ${pi}" />
+          </xacro:if>
+          <xacro:if value="${not flip_joint}">
+            <origin xyz="0 0 ${lz+r+joint_gap}" rpy="0 0 0" />
+          </xacro:if>
+        </xacro:fixed_joint>
+      </xacro:if>
+      <xacro:cylinder_link suffix="m${m_num}3" mass="${my}" length="${ly}" radius="${r}">        
+        <origin xyz="0 ${ly/2-r} 0" rpy="${pi/2} 0 0" />
+      </xacro:cylinder_link>
+    </xacro:if>
+
+    <!-- Exception here x values are used in y for the first cylinder -->
+    <xacro:if value="${pattern == 'yzy'}"> 
+      <xacro:cylinder_link suffix="m${m_num}1" mass="${mx}" length="${lx}" radius="${r}">
+        <origin xyz="0 ${lx/2} 0" rpy="${pi/2} 0 0" />
+      </xacro:cylinder_link>
+      <xacro:fixed_joint prefix="m${m_num}1" suffix="m${m_num}2">
+        <origin xyz="0 ${lx+r+joint_gap}  0" rpy="0 0 0" />
+      </xacro:fixed_joint>
+      <xacro:cylinder_link suffix="m${m_num}2" mass="${mz}" length="${lz}" radius="${r}">
+        <origin xyz="0 0 ${lz/2-r}" rpy="0 0 0" />
+      </xacro:cylinder_link>
+      <xacro:fixed_joint prefix="m${m_num}2" suffix="m${m_num}3">
+        <xacro:if value="${flip_joint}">
+          <origin xyz="0 0 ${lz+joint_gap}" rpy="${pi} 0 0" />
+        </xacro:if>
+        <xacro:if value="${not flip_joint}">
+          <origin xyz="0 0 ${lz+joint_gap}" rpy="0 0 0" />
+        </xacro:if>
+      </xacro:fixed_joint>
+      <xacro:cylinder_link suffix="m${m_num}3" mass="${my}" length="${ly}" radius="${r}">        
+        <origin xyz="0 ${ly/2-r} 0" rpy="${pi/2} 0 0" />
+      </xacro:cylinder_link>
+    </xacro:if>
+    
+  </xacro:macro>
+
+  <!-- Gripper axis is always z -->
+  <xacro:macro name="gripper" params="m_num h r mc mb mf s">
+    <xacro:property name="sx" value="${s*0.06}" />
+    <xacro:property name="sy" value="${s*0.2}" />
+    <xacro:property name="sz" value="${s*0.09}" />
+    <xacro:property name="fx" value="${s*0.02}" />
+    <xacro:property name="fy" value="${s*0.03}" />
+    <xacro:property name="fz" value="${s*0.05}" />
+    <xacro:cylinder_link suffix="m${m_num}1" mass="${mc}" length="${h}" radius="${r}">
+      <origin xyz="0 0 ${h/2}" rpy="0 0 0" />
+    </xacro:cylinder_link>
+    <xacro:fixed_joint prefix="m${m_num}1" suffix="g${m_num}1">
+      <origin xyz="0 0 ${h+sz/2+0.0005}" rpy="0 0 0" />
+    </xacro:fixed_joint>
+    <link name="link_g${m_num}1">
+      <visual>
+        <geometry>
+          <box size="${sx} ${sy} ${sz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${sx} ${sy} ${sz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mb}" x="${sx}" y="${sy}" z="${sz}"/>
+    </link>
+    <xacro:fixed_joint prefix="g${m_num}1" suffix="g${m_num}2">
+      <origin xyz="0 ${sy/4} ${sz/2+fz/2+joint_gap}" rpy="0 0 0" />
+    </xacro:fixed_joint>
+    <link name="link_g${m_num}2">
+      <visual>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mf}" x="${fx}" y="${fy}" z="${fz}"/>
+    </link>
+    <xacro:fixed_joint prefix="g${m_num}1" suffix="g${m_num}3">
+      <origin xyz="0 ${-sy/4} ${sz/2+fz/2+joint_gap}" rpy="0 0 0" />
+    </xacro:fixed_joint>
+    <link name="link_g${m_num}3">
+      <visual>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+        <material name="teal"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${fx} ${fy} ${fz}"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertia mass="${mf}" x="${fx}" y="${fy}" z="${fz}"/>
+    </link>
+  </xacro:macro>
+
+</robot>

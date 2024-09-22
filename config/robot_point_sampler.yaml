@@ -1,0 +1,345 @@
+ompl_xcod_planning:
+    ur_robot:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            upper_arm_link: 2
+            forearm_link: 3
+            wrist_1_link: 4
+            wrist_2_link: 4
+            wrist_3_link: 4
+            robotiq_85_base_link: 5
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+    
+    sawyer:
+        semantic_map:
+            right_arm_base_link: 0
+            right_l0: 1
+            head: 1
+            right_l1: 2
+            right_l2: 3
+            right_l3: 4
+            right_l4: 5
+            right_l5: 6
+            right_l6: 7
+            right_electric_gripper_base: 7
+            right_connector_plate_base: 7
+            right_gripper_l_finger: 7
+            right_gripper_l_finger_tip: 7
+            right_gripper_r_finger: 7
+            right_gripper_r_finger_tip: 7
+        ee_links: [7,]
+    
+    franka:
+        semantic_map: 
+            panda_link0: 0
+            panda_link1: 1
+            panda_link2: 2
+            panda_link3: 3
+            panda_link4: 4
+            panda_link5: 5
+            panda_link6: 6
+            panda_link7: 7
+            panda_hand: 7
+            panda_leftfinger: 7
+            panda_rightfinger: 7
+        ee_links: [7,]
+    
+    kuka:
+        semantic_map:
+            link_0: 0
+            link_1: 1
+            link_2: 2
+            link_3: 3
+            link_4: 4
+            link_5: 5
+            link_6: 6
+            link_7: 7
+            gripper_base_link: 7
+            left_finger_link: 7
+            right_finger_link: 7
+        ee_links: [7,]
+    
+    kinova_6:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            bicep_link: 2
+            forearm_link: 3
+            spherical_wrist_1_link: 4
+            spherical_wrist_2_link: 5
+            bracelet_link: 6
+            robotiq_85_base_link: 6
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+    
+    kinova_7:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            half_arm_1_link: 2
+            half_arm_2_link: 3
+            forearm_link: 4
+            spherical_wrist_1_link: 5
+            spherical_wrist_2_link: 6
+            bracelet_link: 7
+            robotiq_85_base_link: 7
+            robotiq_85_left_knuckle_link: 7
+            robotiq_85_right_knuckle_link: 7
+            robotiq_85_left_finger_link: 7
+            robotiq_85_right_finger_link: 7
+            robotiq_85_left_inner_knuckle_link: 7
+            robotiq_85_right_inner_knuckle_link: 7
+            robotiq_85_left_finger_tip_link: 7
+            robotiq_85_right_finger_tip_link: 7
+        ee_links: [7,]
+
+xcod_ik:
+    ur_robot:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            upper_arm_link: 2
+            forearm_link: 3
+            wrist_1_link: 4
+            wrist_2_link: 4
+            wrist_3_link: 4
+            robotiq_85_base_link: 5
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+    
+    sawyer:
+        semantic_map:
+            right_arm_base_link: 0
+            right_l0: 1
+            head: 1
+            right_l1: 2
+            right_l2: 3
+            right_l3: 4
+            right_l4: 5
+            right_l5: 6
+            right_l6: 7
+            right_electric_gripper_base: 7
+            right_connector_plate_base: 7
+            right_gripper_l_finger: 7
+            right_gripper_l_finger_tip: 7
+            right_gripper_r_finger: 7
+            right_gripper_r_finger_tip: 7
+        ee_links: [7,]
+    
+    franka:
+        semantic_map: 
+            panda_link0: 0
+            panda_link1: 1
+            panda_link2: 2
+            panda_link3: 3
+            panda_link4: 4
+            panda_link5: 5
+            panda_link6: 6
+            panda_link7: 7
+            panda_hand: 7
+            panda_leftfinger: 7
+            panda_rightfinger: 7
+        ee_links: [7,]
+    
+    kuka:
+        semantic_map:
+            link_0: 0
+            link_1: 1
+            link_2: 2
+            link_3: 3
+            link_4: 4
+            link_5: 5
+            link_6: 6
+            link_7: 7
+            gripper_base_link: 7
+            left_finger_link: 7
+            right_finger_link: 7
+        ee_links: [7,]
+    
+    kinova_6:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            bicep_link: 2
+            forearm_link: 3
+            spherical_wrist_1_link: 4
+            spherical_wrist_2_link: 5
+            bracelet_link: 6
+            robotiq_85_base_link: 6
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+    
+    kinova_7:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            half_arm_1_link: 2
+            half_arm_2_link: 3
+            forearm_link: 4
+            spherical_wrist_1_link: 5
+            spherical_wrist_2_link: 6
+            bracelet_link: 7
+            robotiq_85_base_link: 7
+            robotiq_85_left_knuckle_link: 7
+            robotiq_85_right_knuckle_link: 7
+            robotiq_85_left_finger_link: 7
+            robotiq_85_right_finger_link: 7
+            robotiq_85_left_inner_knuckle_link: 7
+            robotiq_85_right_inner_knuckle_link: 7
+            robotiq_85_left_finger_tip_link: 7
+            robotiq_85_right_finger_tip_link: 7
+        ee_links: [7,]
+
+xmop_planning:
+    ur_robot:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            upper_arm_link: 2
+            forearm_link: 3
+            wrist_1_link: 4
+            wrist_2_link: 5
+            wrist_3_link: 6
+            robotiq_85_base_link: 6
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+        home_config: [0, -1.570, 0, -1.570, 0, 0]
+        pose_skip_links: []
+    
+    sawyer:
+        semantic_map:
+            right_arm_base_link: 0
+            right_l0: 1
+            head: 1
+            right_l1: 2
+            right_l2: 3
+            right_l3: 4
+            right_l4: 5
+            right_l5: 6
+            right_l6: 7
+            right_electric_gripper_base: 7
+            right_connector_plate_base: 7
+            right_gripper_l_finger: 7
+            right_gripper_l_finger_tip: 7
+            right_gripper_r_finger: 7
+            right_gripper_r_finger_tip: 7
+        ee_links: [7,]
+        home_config: [0.0, -0.9, 0.0, 1.8, 0.0, -0.9, 0.0]
+        pose_skip_links: ['head']
+    
+    franka:
+        semantic_map: 
+            panda_link0: 0
+            panda_link1: 1
+            panda_link2: 2
+            panda_link3: 3
+            panda_link4: 4
+            panda_link5: 5
+            panda_link6: 6
+            panda_link7: 7
+            panda_hand: 7
+            panda_leftfinger: 7
+            panda_rightfinger: 7
+        ee_links: [7,]
+        home_config: [0, -0.785, 0, -2.356, 0, 1.570, 0.785]
+        pose_skip_links: []
+    
+    kuka:
+        semantic_map:
+            link_0: 0
+            link_1: 1
+            link_2: 2
+            link_3: 3
+            link_4: 4
+            link_5: 5
+            link_6: 6
+            link_7: 7
+            gripper_base_link: 7
+            left_finger_link: 7
+            right_finger_link: 7
+        ee_links: [7,]
+        home_config: [0., 0., 0., 0., 0., 0., 0.]
+        pose_skip_links: []
+    
+    kinova_6:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            bicep_link: 2
+            forearm_link: 3
+            spherical_wrist_1_link: 4
+            spherical_wrist_2_link: 5
+            bracelet_link: 6
+            robotiq_85_base_link: 6
+            robotiq_85_left_knuckle_link: 6
+            robotiq_85_right_knuckle_link: 6
+            robotiq_85_left_finger_link: 6
+            robotiq_85_right_finger_link: 6
+            robotiq_85_left_inner_knuckle_link: 6
+            robotiq_85_right_inner_knuckle_link: 6
+            robotiq_85_left_finger_tip_link: 6
+            robotiq_85_right_finger_tip_link: 6
+        ee_links: [6,]
+        home_config: [0, -1.570, 0, -1.570, 0, 0]
+        pose_skip_links: []
+    
+    kinova_7:
+        semantic_map:
+            base_link_inertia: 0
+            shoulder_link: 1
+            half_arm_1_link: 2
+            half_arm_2_link: 3
+            forearm_link: 4
+            spherical_wrist_1_link: 5
+            spherical_wrist_2_link: 6
+            bracelet_link: 7
+            robotiq_85_base_link: 7
+            robotiq_85_left_knuckle_link: 7
+            robotiq_85_right_knuckle_link: 7
+            robotiq_85_left_finger_link: 7
+            robotiq_85_right_finger_link: 7
+            robotiq_85_left_inner_knuckle_link: 7
+            robotiq_85_right_inner_knuckle_link: 7
+            robotiq_85_left_finger_tip_link: 7
+            robotiq_85_right_finger_tip_link: 7
+        ee_links: [7,]
+        home_config: [0, 0.26, 3.14, -2.27, 0, 0.96, 1.57]
+        pose_skip_links: []
+    
