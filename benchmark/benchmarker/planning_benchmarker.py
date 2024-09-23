@@ -22,13 +22,16 @@ class PlanningBenchmarker():
         self.num_obstacle_points = num_obstacle_points
         self.planning_problems = []
 
-        if os.path.exists(f'resources/benchmarks/mpinet_bench_marker/{robot_name}_mpinet_benchmarker_problems.pkl'):
-            with open(f'resources/benchmarks/mpinet_bench_marker/{robot_name}_mpinet_benchmarker_problems.pkl', 'rb') as file:
+        if os.path.exists(f'resources/benchmark_problems/{robot_name}_mpinet_benchmark_problems.pkl'):
+            with open(f'resources/benchmark_problems/{robot_name}_mpinet_benchmark_problems.pkl', 'rb') as file:
                 self.planning_problems = pickle.load(file)
         else:
             raise Exception('Benchmark Not Found')
         
         assert len(self.planning_problems) > 0, 'Loading Benchmark Failed'
+    
+    def __len__(self):
+        return len(self.planning_problems)
     
     def get_problem(self, problem_idx, ee_pose=False):
         problem = self.planning_problems[problem_idx]

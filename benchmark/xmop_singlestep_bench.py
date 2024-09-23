@@ -18,7 +18,7 @@ def bench_process(robot_name, max_rollout_steps, start_idx, end_idx, gpu, idx):
     random.seed()
     torch.random.seed()
     print(f'workhorse started with identifier: {idx}')
-    experiment_name = f'xmop_s-{robot_name}-mpinet-noobs'
+    experiment_name = f'singlestep-xmop-{args.robot_name}-mpinet-noobs'
     traj_dir = f'benchmark/results/temp/{experiment_name}'
     log_dir = f'log/{experiment_name}'
     Path(log_dir).mkdir(parents=True, exist_ok=True)
@@ -28,8 +28,8 @@ def bench_process(robot_name, max_rollout_steps, start_idx, end_idx, gpu, idx):
         mode='singlestep',
         urdf_path=problem_handle.urdf_path,
         config_folder='config/',
-        ckpt_path='checkpoints/',
-        smoothing_factor=0
+        model_dir=None,
+        smoothing_factor=0,
     )
     neural_planner = XMoP(planner_config, device=f'cuda:{gpu}')
 
@@ -49,12 +49,12 @@ def bench_process(robot_name, max_rollout_steps, start_idx, end_idx, gpu, idx):
             duration = time.perf_counter() - start_time
 
             if traj is not None:
-                print(f'Planning Success for {idx}')
+                print(f'Evaluation Success for {idx}')
                 traj_mgr.save_trajectory(idx, np.zeros((traj.shape[1], 10)), 
                                          np.zeros((traj.shape[1], 7)), traj)
                 duration_arr[idx] = duration
             else:
-                print(f'Planning Failed for {idx}')
+                print(f'Evaluation Failed for {idx}')
                 duration_arr[idx] = float('inf')
 
 def clean_dirs(path):
@@ -91,7 +91,7 @@ if __name__=='__main__':
     loaded_metrics = metrics.load(0, len(problem_handle))
     if not loaded_metrics:
         buckets = np.array_split(range(len(problem_handle)), args.num_proc) 
-        task_assignments = [[args.robot_name, args.bench, args.max_rollout_steps,
+        task_assignments = [[args.robot_name, args.max_rollout_steps,
                               buckets[idx][0], buckets[idx][-1]+1, idx%args.num_gpu, idx] for idx in range(args.num_proc)]
         
         shared_arr = RawArray('f', len(problem_handle))
@@ -113,7 +113,7 @@ if __name__=='__main__':
                 sim_handle.set_dummy_state(goal_pose[0], goal_pose[1])
 
             if np.isinf(duration_arr[idx]):
-                print(f'Planning Failed for {idx}')
+                print(f'Evaluation Failed for {idx}')
                 metrics.evaluate_trajectory(
                     idx, None, None, None, None, skip_metrics=True)
             else:

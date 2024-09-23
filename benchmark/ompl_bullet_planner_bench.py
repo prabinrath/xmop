@@ -158,7 +158,7 @@ if __name__=='__main__':
 
     parser = argparse.ArgumentParser(description='Classical+Bullet')
     parser.add_argument('--robot_name', default='franka', type=str, help='Robot for benchmarking')
-    parser.add_argument('--planner', default='rrt_connect', type=str, help='Classical planner')
+    parser.add_argument('--planner', default='ait_star', type=str, help='Classical planner')
     parser.add_argument('--visualize', default=False, type=bool, help='Whether to visualize')
     parser.add_argument('--timeout', default=20, type=int, help='Planning time')
     parser.add_argument('--obstacles', default='obs', type=str, help='Spawn obstacles')
@@ -194,7 +194,7 @@ if __name__=='__main__':
             duration = time.perf_counter() - start_time
 
             if traj is None:
-                print(f'Planning Failed for {idx}')
+                print(f'Evaluation Failed for {idx}')
                 metrics.evaluate_trajectory(
                     idx, None, None, None, None, skip_metrics=True)
             else:

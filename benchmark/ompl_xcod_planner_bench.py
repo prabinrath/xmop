@@ -255,11 +255,11 @@ if __name__=='__main__':
                 duration = time.perf_counter() - start_time
 
                 if traj is None:
-                    print(f'Planning Failed for {idx}')
+                    print(f'Evaluation Failed for {idx}')
                     metrics.evaluate_trajectory(
                         idx, None, None, None, None, skip_metrics=True)
                 else:
-                    print(f'Planning Success for {idx}')
+                    print(f'Evaluation Success for {idx}')
                     if args.visualize:
                         # visualize n_dof plan
                         time.sleep(0.5)

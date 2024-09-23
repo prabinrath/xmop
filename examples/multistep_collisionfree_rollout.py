@@ -54,9 +54,9 @@ planner_config = dict(
         smoothing_factor=0.25
     )
 neural_planner = XMoP(planner_config, 
-                                   validator=coll_model,
-                                   robot_point_sampler=robot_point_sampler,
-                                   device=device)
+                    validator=coll_model,
+                    robot_point_sampler=robot_point_sampler,
+                    device=device)
 
 MAX_ROLLOUT_STEPS = 200
 sim_handle = BulletRobotEnv(gui=True)
