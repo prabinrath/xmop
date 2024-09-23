@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## install pip dependencies
+conda install -y nvidia/label/cuda-12.1.1::cuda-nvcc
 pip install torch==2.2.0
 pip install -r requirements.txt
 
@@ -14,7 +15,6 @@ unzip dependencies/xacro_humble.zip -d dependencies/
 pip install dependencies/xacro_humble
 
 ## install trackikpy
-sudo apt-get install libeigen3-dev liborocos-kdl-dev libkdl-parser-dev liburdfdom-dev libnlopt-dev
 pip install swig
 pip install git+https://github.com/mjd3/tracikpy.git
 

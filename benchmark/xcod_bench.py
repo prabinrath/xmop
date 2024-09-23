@@ -15,6 +15,7 @@ if __name__=='__main__':
     sim_handle = BulletCollisionChecker(problem_handle.urdf_path, gui=False)
 
     coll_model = XCoD(
+        pretrained=True,
         stride=[2, 2],
         enc_depths=[2, 4, 2],
         enc_channels=[32, 64, 128],
@@ -24,7 +25,6 @@ if __name__=='__main__':
         dec_channels=[32, 64],
         dec_num_head=[4, 8],
         dec_patch_size=[256, 256],
-        checkpoint_path='checkpoints/ptv3_semantic_mini_best.pth',
         ).to('cuda')
     coll_model.eval()
 

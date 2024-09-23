@@ -33,6 +33,7 @@ elif [ "$OPTION" == "mpinet" ]; then
 
 elif [ "$OPTION" == "benchmark" ]; then
     echo "Downloading Benchmark problems"
+    mkdir -p resources/
     wget --show-progress https://huggingface.co/datasets/prabinrath/xmop/resolve/main/benchmark_problems.zip -P resources/
     unzip resources/benchmark_problems.zip -d resources/
     rm resources/benchmark_problems.zip

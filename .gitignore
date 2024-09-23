@@ -2,6 +2,7 @@
 **.npy
 **.pth
 resources/
+checkpoints/
 benchmark/results/
 log/
 wandb/

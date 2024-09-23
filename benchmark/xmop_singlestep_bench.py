@@ -74,7 +74,7 @@ if __name__=='__main__':
     parser.add_argument('--robot_name', default='franka', type=str, help='Robot for benchmarking')
     parser.add_argument('--visualize', default=False, type=bool, help='Whether to visualize')
     parser.add_argument('--max_rollout_steps', default=200, type=int, help='Planning time')
-    parser.add_argument('--num_proc', default=20, type=int, help='Number of workhorse processes')
+    parser.add_argument('--num_proc', default=5, type=int, help='Number of workhorse processes')
     parser.add_argument('--num_gpu', default=1, type=int, help='Number of workhorse processes')
     args = parser.parse_args()
     print(args)
