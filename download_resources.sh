@@ -38,6 +38,13 @@ elif [ "$OPTION" == "benchmark" ]; then
     unzip resources/benchmark_problems.zip -d resources/
     rm resources/benchmark_problems.zip
 
+elif [ "$OPTION" == "all" ]; then
+    echo "Downloading All resources"
+    sh download_resources.sh mpinet
+    sh download_resources.sh xmop
+    sh download_resources.sh xcod
+    sh download_resources.sh benchmark
+
 else
     echo "Invalid option: $OPTION"
     echo "Valid options are: xcod, xmop, mpinet"
