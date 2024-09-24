@@ -11,7 +11,7 @@ import numpy as np
 device = 'cuda'
 
 if __name__=='__main__':
-    parser = argparse.ArgumentParser(description='XMoP+XCoD')
+    parser = argparse.ArgumentParser(description='XMoP Planner Demo')
     parser.add_argument('--robot_name', default='franka', type=str, help='Robot for benchmarking')
     parser.add_argument('--visualize', default=False, type=bool, help='Whether to visualize')
     parser.add_argument('--max_rollout_steps', default=200, type=int, help='Planning time')
