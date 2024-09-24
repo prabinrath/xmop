@@ -1,4 +1,4 @@
-# <img src="media/logo.png" width="2%" alt="logo"> XMoP: Whole-Body Control Policy for Zero-shot Cross-Embodiment Neural Motion Planning
+# <img src="media/logo.png" width="3%" alt="logo"> XMoP: Whole-Body Control Policy for Zero-shot Cross-Embodiment Neural Motion Planning
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=flat&logo=ubuntu&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.10.13-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.2.0-orange.svg)
@@ -9,13 +9,12 @@
   <a href="https://huggingface.co/prabinrath/xmop">[Model]</a> •
   <a href="https://huggingface.co/datasets/prabinrath/xmop">[Data]</a>
 </p>
-XMoP ia a novel configuration-space neural motion policy that solves planning problems zero-shot for unseen robotic manipulators which has not been achieved by any prior robot learning algorithm. We formulate C-space control as a link-wise SE(3) pose transformation method, and showcase its scalability for data-driven policy learning. XMoP uses fully synthetic data to train models for motion planning and collision detection while demonstrating strong sim-to-real generalization with a 70% success rate. Our work demonstrates for the first time that C-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a zero-shot manner. This repository contains the implementation, data generation, and evaluation scripts for XMoP.
-
 <p align="center">
   <a href="https://prabinrath.github.io/">Prabin Kumar Rath</a><sup>1</sup>,
   <a href="https://nakulgopalan.github.io/">Nakul Gopalan</a><sup>1</sup> <br>
   <sup>1</sup>Arizona State University
 </p>
+XMoP is a novel configuration-space neural policy that solves motion planning problems zero-shot for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. We formulate C-space control as a link-wise SE(3) pose transformation method, and showcase its scalability for data-driven policy learning. XMoP uses fully synthetic data to train models for motion planning and collision detection while demonstrating strong sim-to-real generalization with a 70% success rate. Our work demonstrates for the first time that C-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a zero-shot manner. This repository contains the implementation, data generation, and evaluation scripts for XMoP.
 
 <div align="center">
   <img src="media/approach.png" alt="approach">
@@ -89,6 +88,10 @@ python examples/real_robot_collision_detection.py
 > Run whole-body pose reconstruction with XCoD out-of-distribution demo
 ```
 python examples/xmop_reconstruction_xcod_ood.py
+```
+> Run XCoD Ompl hybrid planning demo
+```
+python examples/ompl_xcod_hybrid_planning.py
 ```
 ### 2. Data generation
 Data generation can be run on separate systems for consecutive fragments. Later they are merged to generate a unified dataset.
