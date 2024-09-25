@@ -14,20 +14,24 @@
   <a href="https://nakulgopalan.github.io/">Nakul Gopalan</a><sup>1</sup> <br>
   <sup>1</sup>Arizona State University
 </p>
-XMoP is a novel configuration-space neural policy that solves motion planning problems zero-shot for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. We formulate C-space control as a link-wise SE(3) pose transformation method, and showcase its scalability for data-driven policy learning. XMoP uses fully synthetic data to train models for motion planning and collision detection while demonstrating strong sim-to-real generalization with a 70% success rate. Our work demonstrates for the first time that C-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a zero-shot manner. This repository contains the implementation, data generation, and evaluation scripts for XMoP.
+XMoP is a novel configuration-space neural policy that solves motion planning problems zero-shot for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. We formulate C-space control as a link-wise SE(3) pose transformation method, and showcase its scalability for data-driven policy learning. XMoP uses fully synthetic data to train models for motion planning and collision detection while demonstrating strong sim-to-real generalization with a 70% success rate. Our work demonstrates for the first time that C-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a zero-shot manner. This repository contains the implementation, data generation, and evaluation scripts for XMoP. <br><br>
 
 <div align="center">
   <img src="media/approach.png" alt="approach">
 </div>
 
 ## 🦾 Real-world rollouts
-All rollouts shown below use XMoP with a fixed set of frozen policy parameters which was completely trained on synthetic (`robots and environments`) planning demonstration data.
+All rollouts shown below use XMoP with a fixed set of frozen policy parameters which were completely trained on synthetic (`robots and environments`) planning demonstration data.
 <div align="center" style="max-width: 100%;margin: 0; padding: 0;">
   <img src="media/xmop_webpage_banner.gif" alt="realworld" style="width: 100%; height: auto;margin: 0; padding: 0;">
 </div>
 
 ## 🛠️ Installation
 The system has been tested on Ubuntu 22.04 with Intel 19 12th Gen CPU, 64GB RAM, and NVIDIA RTX 3090 GPU.
+Clone the source from github using the below command.
+```
+git clone https://github.com/prabinrath/xmop.git -b main
+```
 ### 1. Docker setup (recommended)
 > Install docker
 
@@ -129,3 +133,16 @@ Coming soon!
 This repository is released under the MIT license. See [LICENSE](LICENSE) for additional details.
 ## 🙏 Acknowledgement
 [MpiNets](https://mpinets.github.io/) • [Diffusion Policy](https://diffusion-policy.cs.columbia.edu/) • [Diffusion Transformer](https://www.wpeebles.com/DiT)
+## 📝 Citation
+If you find this codebase useful in your research, please cite [the XMoP paper](https://arxiv.org/pdf/2409.15585):
+```bibtex
+@article{rath2024xmop,
+      title={XMoP: Whole-Body Control Policy for Zero-shot Cross-Embodiment Neural Motion Planning}, 
+      author={Prabin Kumar Rath and Nakul Gopalan},
+      year={2024},
+      eprint={2409.15585},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2409.15585}, 
+}
+```

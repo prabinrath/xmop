@@ -40,10 +40,10 @@ elif [ "$OPTION" == "benchmark" ]; then
 
 elif [ "$OPTION" == "all" ]; then
     echo "Downloading All resources"
-    sh download_resources.sh mpinet
-    sh download_resources.sh xmop
-    sh download_resources.sh xcod
-    sh download_resources.sh benchmark
+    bash download_resources.sh mpinet
+    bash download_resources.sh xmop
+    bash download_resources.sh xcod
+    bash download_resources.sh benchmark
 
 else
     echo "Invalid option: $OPTION"
