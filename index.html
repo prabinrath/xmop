@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Data-Driven Cross-Embodiment Neural Motion Planning">
+  <meta name="keywords" content="Zero-shot Cross-Embodiment, Neural Motion Planning, Sim-to-Real, Collision Avoidance">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XMoP</title>
+
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV4ZJ9PVSV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-FV4ZJ9PVSV');
+  </script> -->
+
+  <script>
+    function updateSingleVideo() {
+      var demo = document.getElementById("single-menu-demos").value;
+      var task = document.getElementById("single-menu-tasks").value;
+      var inst = document.getElementById("single-menu-instances").value;
+
+      console.log("single", demo, task, inst)
+
+      var video = document.getElementById("multi-task-result-video");
+      video.src = "media/results/sim_rollouts/" + 
+                  "n" +
+                  demo +
+                  "-" +
+                  task +
+                  "-" +
+                  inst +
+                  ".mp4"
+      video.playbackRate = 1.75;
+      video.play();
+    }
+
+    function updateQpredVideo() {
+      var task = document.getElementById("single-menu-qpred").value;
+
+      console.log("qpred", task)
+
+      var video = document.getElementById("q-pred-video");
+      video.src = "media/results/qpred/" + 
+                  task + 
+                  ".mp4"
+      video.playbackRate = 1.75;
+      video.play();
+    }
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body onload="updateSingleVideo(); updateQpredVideo();">
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><img src="resources/logo.png" width="3%" alt="logo"> XMoP: Whole-Body Control Policy for Zero-shot Cross-Embodiment Neural Motion Planning</h1>
+          <div class="is-size-5 publication-authors">
+            <a target="_blank" href="https://prabinrath.github.io/">Prabin Kumar Rath</a>&nbsp;&nbsp;&nbsp;
+                <a target="_blank" href="https://nakulgopalan.github.io/">Nakul Gopalan</a>&nbsp;&nbsp;&nbsp;
+                <br><br>
+              <img src="resources/asu_logo.png" width="20%"></img>
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a target="_blank" href="resources/paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Arxiv Link. -->
+            <span class="link-block">
+              <a target="_blank" href="resources/paper.pdf"
+                 class="external-link button is-normal is-rounded is-dark">
+                
+                <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                </span>
+                <span>ArXiv</span>
+              </a>
+            </span>
+
+            <!-- Code Link. -->
+            <span class="link-block">
+              <a target="_blank" href="https://github.com/prabinrath/xmop"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>
+
+            <!-- Model Link. -->
+            <span class="link-block">
+              <a href="https://huggingface.co/prabinrath/xmop"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <img src="static/images/hf_icon.svg" />
+                </span>
+                <span>Models</span>
+              </a>
+            </span>
+            
+            <!-- twitter Link. -->
+            <!-- <span class="link-block">
+              <a target="_blank" href=""
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                </span>
+                <span>Summary</span>
+              </a>
+            </span> -->
+
+            <!-- Dataset Link. -->
+            <span class="link-block">
+              <a href="https://huggingface.co/datasets/prabinrath/xmop"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <img src="static/images/db_icon.svg" />
+                </span>
+                <span>Datasets</span>
+              </a>
+            </span>
+
+            <!-- Bibtex Link. -->
+            <span class="link-block">
+              <a target="_blank" href="#BibTeX"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>BibTeX</span>
+              </a>
+            </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-fullhd">
+    <div class="hero-body">
+      <div class="container">
+        <div class="rows is-vcentered  is-centered">
+            <img src="resources/poster.png" width="100%"></img>
+            <div style="display: flex; justify-content: center; padding-top: 10px;">
+              <video class="center" playsinline controls src="resources/xmop_intro.mp4" width="80%" style="border-radius:10px;"></video>
+            </div>
+          </div>
+          </br>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+        <span class="dperact">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_unstructured_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_bin_to_bin_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_wall_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_unstructured_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_bin_to_bin_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_wall_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+    <div class="container">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+              <p>
+                Classical manipulator motion planners work across different robot embodiments. However they plan on a pre-specified static environment representation, and are not scalable to unseen dynamic environments. Neural Motion Planners (NMPs) are an appealing alternative to conventional planners as they incorporate different environmental constraints to learn motion policies directly from raw sensor observations. Contemporary state-of-the-art NMPs can successfully plan across different environments. However none of the existing NMPs generalize across robot embodiments. In this paper we propose Cross-Embodiment Motion Policy (XMoP), a neural policy for learning to plan over a distribution of manipulators. XMoP implicitly learns to satisfy kinematic constraints for a distribution of robots and <i>zero-shot</i> transfers the planning behavior to unseen robotic manipulators within this distribution. We achieve this generalization by formulating a whole-body control policy that is trained on planning demonstrations from over three million procedurally sampled robotic manipulators in different simulated environments. Despite being completely trained on synthetic embodiments and environments, our policy exhibits strong sim-to-real generalization across manipulators with different kinematic variations and degrees of freedom with a single set of frozen policy parameters. We evaluate XMoP on <b>7</b> commercial manipulators and show successful cross-embodiment motion planning, achieving an average <b>70%</b> success rate on baseline benchmarks. Furthermore, we demonstrate our policy sim-to-real on two unseen manipulators solving novel planning problems across three real-world domains even with dynamic obstacles.
+              </p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-4" style="text-align: center; padding-bottom: 10px"><strong>Cross-Embodiment Configuration-Space Control Method</strong></h2> 
+          <div class="columns is-centered has-text-centered">
+          <div class="column is-two-thirds ">
+          <div class="content has-text-justified">
+          </div>
+        </div>
+      </div>
+          <div class="columns is-centered">
+            <div class="column is-full-width" style="text-align: center;">
+              <img src="resources/approach.png" alt="Image description" width="80%">
+              <br>
+              <br>
+              <div class="columns is-centered has-text-centered">
+                <div class="column is-two-thirds">
+                <div class="content has-text-justified interpolation-panel">
+                    <p style="text-align: center;font-size: 18px">XMoP is a novel configuration-space neural policy that solves motion planning problems <i>zero-shot</i> for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. Our work demonstrates for the first time that configuration-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a <i>zero-shot</i> manner. </p>
+                </div>
+              </div>
+            </div>
+            <br>
+              
+            </div>
+          </div>
+         
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-4" style="text-align: center; color: brown;"><strong>All rollouts shown in the videos (both simulated and real) use XMoP with a fixed set of frozen policy parameters</strong></h2>
+        </div> 
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+                <h3 class="title is-4" style="text-align: center; padding-bottom: 10px;"><strong>Zero-shot Sim-to-Real Rollout on Franka FR3 and Sawyer Robots. Policy observation shown in top-right corner</strong></h3>
+                
+                <div class="columns">
+                    <div class="column">
+                        <video class="center" playsinline loop controls muted src="resources/extras/franka_22_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                        <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
+                    </div>
+                    <div class="column">
+                        <video class="center" playsinline loop controls muted src="resources/extras/sawyer_23_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                    </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_14_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/franka_61_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/franka_45_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_31_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/franka_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+              <h3 class="title is-4" style="text-align: center; padding-bottom: 10px;"><strong>Closed-loop Rollout in Dynamic Environments</strong></h3>
+              
+              <div class="columns">
+                  <div class="column">
+                      <video class="center" playsinline loop controls muted src="resources/dynamic/dynamic_7_updated (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                      <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
+                  </div>
+                  <div class="column">
+                      <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_1_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_5_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                </div>
+                <div class="column">
+                  <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_8_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="section"></section>
+  <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+              <h3 class="title is-4" style="text-align: center; padding-bottom: 10px;"><strong>XMoP-S, an ablated policy that uses vanilla Transformer model for zero-shot cross-embodiment 6-DoF reaching</strong></h3>
+              <div class="column" style="display: flex; justify-content: center;">
+                <video class="center" playsinline loop controls muted src="resources/xmop_s_rollouts.mp4" width="80%" style="border-radius:10px;"></video>
+                <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="section"></section>
+  <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+              <h3 class="title is-4" style="text-align: center; padding-bottom: 10px; color: darkgreen;"><strong>Fully Synthetic Planning Demonstration Data</strong></h3>
+              <div class="column" style="display: flex; justify-content: center;">
+                <video class="center" playsinline loop controls muted src="resources/xmop_training_data_edited.mp4" width="80%" style="border-radius:10px;"></video>
+                <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="section"></section>
+  <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+              <h3 class="title is-4" style="text-align: center; padding-bottom: 10px;"><strong>Failure Modes</strong></h3>
+              
+              <div class="columns">
+                  <div class="column">
+                      <video class="center" playsinline loop controls muted src="resources/failure/franka_bin_to_bin_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                      <p style="text-align: center; font-size: 18px">Hits the walls of the bin while approaching</p>
+                  </div>
+                  <div class="column">
+                      <video class="center" playsinline loop controls muted src="resources/failure/sawyer_wall_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                      <p style="text-align: center; font-size: 18px">Collision when goal is too close to the obstacle</p>
+                    </div>
+                  <div class="column">
+                    <video class="center" playsinline loop controls muted src="resources/failure/franka_unstructured_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                    <p style="text-align: center; font-size: 18px">Partially observable obstacle leads to collision</p>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</section>
+
+<a id="BibTeX"></a>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{rath2024xmop,
+      title={XMoP: Whole-Body Control Policy for Zero-shot Cross-Embodiment Neural Motion Planning}, 
+      author={Prabin Kumar Rath and Nakul Gopalan},
+      year={2024},
+      eprint={2409.15585},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2409.15585}, 
+} </code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p> Website borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> under a <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0
+              International</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
