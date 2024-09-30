@@ -35,6 +35,10 @@ RUN apt install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt
 
+RUN apt update && apt install -y --no-install-recommends libgl1-mesa-glx libgl1-mesa-dri \
+  && echo "export LIBGL_DRIVERS_PATH=/usr/lib/x86_64-linux-gnu/dri" >> /root/.bashrc 
+
+# Install OMPL
 RUN python3 -m pip install -vU pygccxml pyplusplus \
   && git clone --recurse-submodules https://github.com/ompl/ompl.git \
   && export CXX=g++ \

@@ -51,15 +51,16 @@ git clone https://github.com/prabinrath/xmop.git -b main
 > Install docker
 
 Install docker from this [tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04).
-Install `nvidia-container-toolkit` from this [tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+Install `nvidia-container-toolkit` from this [tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). It is recommended to `reboot` your system after installation of these software.
 
 > Download image
 
-The docker image comes pre-installed with all required dependencies for data generation, training, inference, and benchmarking.
+The docker image comes pre-configured with all required dependencies for data generation, training, inference, and benchmarking.
 ```
 cd <xmop-root-directory>
 bash xmop_dev_docker.sh
 ```
+If you are getting a `Permission denied` error, then use `sudo` before `bash`.
 > Exit container
 ```
 ctrl+d
@@ -67,7 +68,7 @@ ctrl+d
 ### 2. Local setup
 > System dependencies
 ```
-sudo apt install -y libosmesa6-dev libgl1-mesa-glx libglfw3 \
+sudo apt install -y libgl1-mesa-glx libgl1-mesa-dri \
 liborocos-kdl-dev libkdl-parser-dev liburdfdom-dev libnlopt-dev libnlopt-cxx-dev \
 git wget
 ```
@@ -78,20 +79,22 @@ conda activate xmop_dev
 cd <xmop-root-directory>
 bash setup_xmop_conda_dev_env.sh
 ```
+The conda env needs to be deactivated and activated again to set the `PYTHONPATH` for xmop.
+```
+conda deactivate
+conda activate xmop_dev
+```
 > OMPL (optional)
 
-Ompl is required for data generation and baseline experiments. Install ompl with python bindings from [here](https://github.com/ompl/ompl).
+Ompl is required for data generation and baseline experiments. Install ompl with python bindings from [here](https://github.com/ompl/ompl). Setting up OMPL can be challenging and tricky to configure manually. To simplify the process, we recommend using our docker container, which comes pre-configured with required dependencies.
 
 ## 🛝 Try it out!
 > Download datasets and benchmark assets
 ```
+cd <xmop-root-directory>
 bash download_resources.sh all
 ```
 ### 1. Run examples
-```
-conda activate xmop_dev
-cd <xmop-root-directory>
-```
 For each of the following demos, you can change the value of `URDF_PATH` variable to run on different robots.
 > Run XMoP planning demo
 ```
