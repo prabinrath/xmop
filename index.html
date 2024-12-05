@@ -218,52 +218,6 @@
   </div>
 </section>
 
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" muted loop controls height="100%">
-            <source src="resources/success/franka_unstructured_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-steve">
-          <video poster="" id="steve" muted loop controls height="100%">
-            <source src="resources/success/sawyer_bin_to_bin_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" muted loop controls height="100%">
-            <source src="resources/success/franka_wall_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" muted loop controls height="100%">
-            <source src="resources/success/sawyer_unstructured_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" muted loop controls height="100%">
-            <source src="resources/success/franka_bin_to_bin_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" muted loop controls height="100%">
-            <source src="resources/success/sawyer_wall_success.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section">
     <div class="container">
       <!-- Abstract. -->
@@ -280,6 +234,50 @@
       <br>
       <br>
     </div>
+
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_bin_to_bin_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_unstructured_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_wall_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_bin_to_bin_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/franka_unstructured_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay muted loop controls height="100%">
+            <source src="resources/success/sawyer_wall_success.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-full-width">
@@ -293,21 +291,41 @@
           <div class="columns is-centered">
             <div class="column is-full-width" style="text-align: center;">
               <img src="resources/approach.png" alt="Image description" width="80%">
-              <br>
-              <br>
-              <div class="columns is-centered has-text-centered">
-                <div class="column is-two-thirds">
-                <div class="content has-text-justified interpolation-panel">
-                    <p style="text-align: center;font-size: 18px">XMoP is a novel configuration-space neural policy that solves motion planning problems <i>zero-shot</i> for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. Our work demonstrates for the first time that configuration-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a <i>zero-shot</i> manner. Follow <a target="_blank" href="https://github.com/prabinrath/xmop?tab=readme-ov-file#-add-a-new-manipulator">this</a> tutorial to add your own robot. It's <strong><i>zero-shot</i></strong> !</p>
-                </div>
-              </div>
+            </div>
             </div>
             <br>
-              
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-4" style="text-align: center; padding-bottom: 10px"><strong>Cross-Embodiment Collision Detection Method</strong></h2> 
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-two-thirds ">
+              <div class="content has-text-justified">
             </div>
           </div>
+        </div>
+            <div class="columns is-centered">
+              <div class="column is-full-width" style="text-align: center;">
+                <img src="resources/policy_arch.png" alt="Image description" width="80%">
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="columns is-centered has-text-centered">
+                  <div class="column is-two-thirds">
+                  <div class="content has-text-justified interpolation-panel">
+                      <p style="text-align: center;font-size: 18px">XMoP is a novel configuration-space neural policy that solves motion planning problems <i>zero-shot</i> for unseen robotic manipulators, which has not been achieved by any prior robot learning algorithm. Our work demonstrates for the first time that configuration-space behavior cloning policies can be learned without embodiment bias and that these learned behaviors can be transferred to novel unseen embodiments in a <i>zero-shot</i> manner. Follow <a target="_blank" href="https://github.com/prabinrath/xmop?tab=readme-ov-file#-add-a-new-manipulator"><strong>this</strong></a> tutorial to add your own robot. It's <strong><i>zero-shot</i></strong> !</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+          </div>
+        </div>
          
-  </section>
+</section>
 
   <section class="section">
     <div class="container">
@@ -327,35 +345,35 @@
                 
                 <div class="columns">
                     <div class="column">
-                        <video class="center" playsinline loop controls muted src="resources/extras/franka_22_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                        <video class="center" autoplay playsinline loop controls muted src="resources/extras/franka_22_merged.mp4" width="100%" style="border-radius:10px;"></video>
                         <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
                     </div>
                     <div class="column">
-                        <video class="center" playsinline loop controls muted src="resources/extras/sawyer_23_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                        <video class="center" autoplay playsinline loop controls muted src="resources/extras/sawyer_23_merged.mp4" width="100%" style="border-radius:10px;"></video>
                     </div>
                 </div>
                 <div class="columns">
                   <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_14_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/sawyer_14_merged.mp4" width="100%" style="border-radius:10px;"></video>
                   </div>
                   <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/franka_61_merged.mp4" width="100%" style="border-radius:10px;"></video>
-                  </div>
-                </div>
-                <div class="columns">
-                  <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/franka_45_merged.mp4" width="100%" style="border-radius:10px;"></video>
-                  </div>
-                  <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_31_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/franka_61_merged.mp4" width="100%" style="border-radius:10px;"></video>
                   </div>
                 </div>
                 <div class="columns">
                   <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/franka_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/franka_45_merged.mp4" width="100%" style="border-radius:10px;"></video>
                   </div>
                   <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/extras/sawyer_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/sawyer_31_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/franka_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
+                  </div>
+                  <div class="column">
+                    <video class="center" autoplay playsinline loop controls muted src="resources/extras/sawyer_32_merged.mp4" width="100%" style="border-radius:10px;"></video>
                   </div>
                 </div>
 
@@ -372,19 +390,19 @@
               
               <div class="columns">
                   <div class="column">
-                      <video class="center" playsinline loop controls muted src="resources/dynamic/dynamic_7_updated (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                      <video class="center" autoplay playsinline loop controls muted src="resources/dynamic/dynamic_7_updated (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
                       <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
                   </div>
                   <div class="column">
-                      <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_1_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                      <video class="center" autoplay playsinline loop controls muted src="resources/dynamic/franka_dyn_1_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
                   </div>
               </div>
               <div class="columns">
                 <div class="column">
-                  <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_5_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                  <video class="center" autoplay playsinline loop controls muted src="resources/dynamic/franka_dyn_5_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
                 </div>
                 <div class="column">
-                  <video class="center" playsinline loop controls muted src="resources/dynamic/franka_dyn_8_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
+                  <video class="center" autoplay playsinline loop controls muted src="resources/dynamic/franka_dyn_8_mask (online-video-cutter.com).mp4" width="100%" style="border-radius:10px;"></video>
                 </div>
               </div>
 
@@ -399,7 +417,7 @@
         <div class="column is-full-width">
               <h3 class="title is-4" style="text-align: center; padding-bottom: 10px;"><strong>XMoP-S, an ablated policy that uses vanilla Transformer model for zero-shot cross-embodiment 6-DoF reaching</strong></h3>
               <div class="column" style="display: flex; justify-content: center;">
-                <video class="center" playsinline loop controls muted src="resources/xmop_s_rollouts.mp4" width="80%" style="border-radius:10px;"></video>
+                <video class="center" autoplay playsinline loop controls muted src="resources/xmop_s_rollouts.mp4" width="80%" style="border-radius:10px;"></video>
                 <!-- <p style="text-align: center; font-size: 18px">xyz</p> -->
               </div>
           </div>
@@ -430,7 +448,7 @@
               <div class="columns">
                   <div class="column">
                       <video class="center" playsinline loop controls muted src="resources/failure/franka_bin_to_bin_failure.mp4" width="100%" style="border-radius:10px;"></video>
-                      <p style="text-align: center; font-size: 18px">Hits the walls of the bin while approaching</p>
+                      <p style="text-align: center; font-size: 18px">Collision while approaching narrow spaces</p>
                   </div>
                   <div class="column">
                       <video class="center" playsinline loop controls muted src="resources/failure/sawyer_wall_failure.mp4" width="100%" style="border-radius:10px;"></video>
