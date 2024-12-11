@@ -108,7 +108,7 @@ python examples/singlestep_reaching_rollout.py
 ```
 python examples/real_robot_collision_detection.py
 ```
-> Run whole-body pose reconstruction with XCoD out-of-distribution demo
+> Run whole-body pose reconstruction with XCoD out-of-distribution collision generalization. This example shows frames attached to each link, which are the whole-body link poses for our control policy, while the colored pointcloud shows the output of XCoD collision detection.
 ```
 python examples/xmop_reconstruction_xcod_ood.py
 ```

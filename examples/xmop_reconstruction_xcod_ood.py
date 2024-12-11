@@ -108,6 +108,7 @@ for idx in random_indices:
             np.asarray([[0., 0., 1.]], dtype=np.float32)
         color_pts[query_indices.numpy()] = color_map[labels_pred[query_indices].cpu().numpy()]
         viz_handle = Open3DVisualizer(window_name='Collision Prediction')
+        viz_handle.show_frames(noisy_link_poses_homo[i].cpu().numpy())
         viz_handle.update_buffers(surface_pts[i][:,:3].cpu().numpy(), color_pts)
         print("INFO: Close the Collision Prediction window for next step")
         viz_handle.vis.run()

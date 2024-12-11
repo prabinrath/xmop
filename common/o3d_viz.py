@@ -30,7 +30,7 @@ class Open3DVisualizer():
     def show_frames(self, frame_poses):
         for pose in frame_poses:
             mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
-                size=1., origin=[0, 0, 0])
+                size=0.1, origin=[0, 0, 0])
             mesh_frame.transform(pose)
             self.vis.add_geometry(mesh_frame)
 
