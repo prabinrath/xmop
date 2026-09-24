@@ -17,42 +17,6 @@
     gtag('config', 'G-FV4ZJ9PVSV');
   </script> -->
 
-  <script>
-    function updateSingleVideo() {
-      var demo = document.getElementById("single-menu-demos").value;
-      var task = document.getElementById("single-menu-tasks").value;
-      var inst = document.getElementById("single-menu-instances").value;
-
-      console.log("single", demo, task, inst)
-
-      var video = document.getElementById("multi-task-result-video");
-      video.src = "media/results/sim_rollouts/" + 
-                  "n" +
-                  demo +
-                  "-" +
-                  task +
-                  "-" +
-                  inst +
-                  ".mp4"
-      video.playbackRate = 1.75;
-      video.play();
-    }
-
-    function updateQpredVideo() {
-      var task = document.getElementById("single-menu-qpred").value;
-
-      console.log("qpred", task)
-
-      var video = document.getElementById("q-pred-video");
-      video.src = "media/results/qpred/" + 
-                  task + 
-                  ".mp4"
-      video.playbackRate = 1.75;
-      video.play();
-    }
-
-  </script>
-
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
@@ -71,7 +35,7 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
-<body onload="updateSingleVideo(); updateQpredVideo();">
+<body>
 
 <section class="hero">
   <div class="hero-body">
@@ -213,7 +177,7 @@
               </div>
             </div>
             <div style="display: flex; justify-content: center; padding-top: 10px;">
-              <video class="center" playsinline controls src="resources/xmop_intro.mp4" width="80%" style="border-radius:10px;"></video>
+              <video preload="metadata" class="center" playsinline controls src="resources/xmop_intro.mp4" width="80%" style="border-radius:10px;"></video>
             </div>
           </div>
           </br>
@@ -460,15 +424,15 @@
               
               <div class="columns">
                   <div class="column">
-                      <video class="center" playsinline loop controls muted src="resources/failure/franka_bin_to_bin_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                      <video preload="metadata" class="center" playsinline loop controls muted src="resources/failure/franka_bin_to_bin_failure.mp4" width="100%" style="border-radius:10px;"></video>
                       <p style="text-align: center; font-size: 18px">Collision while approaching narrow spaces</p>
                   </div>
                   <div class="column">
-                      <video class="center" playsinline loop controls muted src="resources/failure/sawyer_wall_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                      <video preload="metadata" class="center" playsinline loop controls muted src="resources/failure/sawyer_wall_failure.mp4" width="100%" style="border-radius:10px;"></video>
                       <p style="text-align: center; font-size: 18px">Collision when goal is too close to the obstacle</p>
                     </div>
                   <div class="column">
-                    <video class="center" playsinline loop controls muted src="resources/failure/franka_unstructured_failure.mp4" width="100%" style="border-radius:10px;"></video>
+                    <video preload="metadata" class="center" playsinline loop controls muted src="resources/failure/franka_unstructured_failure.mp4" width="100%" style="border-radius:10px;"></video>
                     <p style="text-align: center; font-size: 18px">Partially observable obstacle leads to collision</p>
                   </div>
               </div>
